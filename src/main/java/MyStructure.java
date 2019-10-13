@@ -4,15 +4,24 @@ public class MyStructure implements IMyStructure {
 
     private List<INode> nodes;
 
+    @Override
     public INode findByCode(String code) {
-        return null;
+        return nodes.stream()
+                .filter(n-> n.getCode().equals(code))
+                .findFirst()
+                .orElse(null);
     }
 
+    @Override
     public INode findByRenderer(String renderer) {
-        return null;
+        return nodes.stream()
+                .filter(n->n.getRenderer().equals(renderer))
+                .findFirst()
+                .orElse(null);
     }
 
+    @Override
     public int count() {
-        return 0;
+        return nodes.size();
     }
 }
