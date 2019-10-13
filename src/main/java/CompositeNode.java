@@ -1,8 +1,9 @@
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 public class CompositeNode extends Node implements ICompositeNode {
-    private List<INode> nodes;
+    private List<INode> nodes = new ArrayList<>();
 
     CompositeNode(String code, String renderer) {
         super(code, renderer);

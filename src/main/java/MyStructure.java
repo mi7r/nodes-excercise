@@ -1,9 +1,14 @@
+import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
 
 public class MyStructure implements IMyStructure {
 
-    private List<INode> nodes;
+    private List<INode> nodes = new ArrayList<>();
+
+    List<INode> getNodes() {
+        return nodes;
+    }
 
     @Override
     public INode findByCode(String code) {
