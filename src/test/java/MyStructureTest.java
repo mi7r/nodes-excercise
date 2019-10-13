@@ -5,14 +5,14 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class MyStructureTest {
 
-    private static final Node NODE_1 = new Node("code1","renderer1");
-    private static final Node NODE_2 = new Node("code2","renderer2");
-    private static final CompositeNode COMPOSITE_NODE_1 = new CompositeNode("composite code 1","composite renderer 1");
+    private static final Node NODE_1 = new Node("code1", "renderer1");
+    private static final Node NODE_2 = new Node("code2", "renderer2");
+    private static final CompositeNode COMPOSITE_NODE_1 = new CompositeNode("composite code 1", "composite renderer 1");
 
     private MyStructure myStructure;
 
     @BeforeEach
-    void setUp(){
+    void setUp() {
         myStructure = new MyStructure();
 
         myStructure.getNodes().add(NODE_1);
@@ -20,6 +20,10 @@ class MyStructureTest {
         myStructure.getNodes().add(COMPOSITE_NODE_1);
     }
 
+    @Test
+    void shouldBeAbleToInstantiateClass() {
+        assertNotNull(myStructure);
+    }
 
     @Test
     void shouldReturnNodeFoundByCode() {
@@ -27,13 +31,13 @@ class MyStructureTest {
     }
 
     @Test
-    void shouldReturnNullWhenNotFoundByCode(){
+    void shouldReturnNullWhenNotFoundByCode() {
         assertNull(myStructure.findByCode("code3000"));
     }
 
     @Test
-    void shouldThrowExceptionWhenPassedCodeIsNull(){
-        assertThrows(IllegalArgumentException.class,() -> myStructure.findByCode(null));
+    void shouldThrowExceptionWhenPassedCodeIsNull() {
+        assertThrows(IllegalArgumentException.class, () -> myStructure.findByCode(null));
     }
 
     @Test
@@ -42,22 +46,22 @@ class MyStructureTest {
     }
 
     @Test
-    void shouldReturnNullWhenNotFoundByRenderer(){
+    void shouldReturnNullWhenNotFoundByRenderer() {
         assertNull(myStructure.findByRenderer("renderer4000"));
     }
 
     @Test
-    void shouldThrowExceptionWhenPassedRendererIsNull(){
-        assertThrows(IllegalArgumentException.class, ()-> myStructure.findByRenderer(null));
+    void shouldThrowExceptionWhenPassedRendererIsNull() {
+        assertThrows(IllegalArgumentException.class, () -> myStructure.findByRenderer(null));
     }
 
     @Test
-    void shouldReturnCompositeNodeFoundByRenderer(){
+    void shouldReturnCompositeNodeFoundByRenderer() {
         assertEquals(COMPOSITE_NODE_1, myStructure.findByRenderer("composite renderer 1"));
     }
 
     @Test
-    void shouldReturnCompositeNodeFoundByCode(){
+    void shouldReturnCompositeNodeFoundByCode() {
         assertEquals(COMPOSITE_NODE_1, myStructure.findByCode("composite code 1"));
     }
 
@@ -67,14 +71,9 @@ class MyStructureTest {
     }
 
     @Test
-    void shouldReturnZeroWhenThereIsNoNodes(){
+    void shouldReturnZeroWhenThereIsNoNodes() {
         myStructure.getNodes().clear();
 
         assertEquals(0, myStructure.count());
-    }
-
-    @Test
-    void shouldBeAbleToInstantiateClass(){
-        assertNotNull(myStructure);
     }
 }
