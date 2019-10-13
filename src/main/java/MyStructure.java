@@ -1,4 +1,5 @@
 import java.util.List;
+import java.util.function.Predicate;
 
 public class MyStructure implements IMyStructure {
 
@@ -6,22 +7,29 @@ public class MyStructure implements IMyStructure {
 
     @Override
     public INode findByCode(String code) {
-        return nodes.stream()
-                .filter(n-> n.getCode().equals(code))
-                .findFirst()
-                .orElse(null);
+        if (code == null) {
+            throw new IllegalArgumentException("Passed parameter can not be null.");
+        }
+        return filterByPredicate(node -> code.equals(node.getCode()));
     }
 
     @Override
     public INode findByRenderer(String renderer) {
-        return nodes.stream()
-                .filter(n->n.getRenderer().equals(renderer))
-                .findFirst()
-                .orElse(null);
+        if (renderer == null) {
+            throw new IllegalArgumentException("Passed parameter can not be null.");
+        }
+        return filterByPredicate(node -> renderer.equals(node.getRenderer()));
     }
 
     @Override
     public int count() {
         return nodes.size();
+    }
+
+    private INode filterByPredicate(Predicate<INode> predicate) {
+        return nodes.stream()
+                .filter(predicate)
+                .findFirst()
+                .orElse(null);
     }
 }
